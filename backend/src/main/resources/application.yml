@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: taskflow-backend
+  datasource:
+    # File-based H2 so data survives restarts in local development.
+    # The Docker Compose stack overrides this with MySQL via environment variables.
+    url: jdbc:h2:file:./data/taskflow
+    username: sa
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+server:
+  port: 8080
+
+taskflow:
+  jwt:
+    # HS256 requires at least 256 bits. Lab-only default: override with JWT_SECRET
+    # in any shared or deployed environment.
+    secret: ${JWT_SECRET:taskflow-dev-secret-please-override-0123456789abcdef}
+    ttl-minutes: 120
+  seed:
+    username: demo
+    password: ${DEMO_PASSWORD:demo1234}
