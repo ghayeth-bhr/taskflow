@@ -1,0 +1,50 @@
+<h1 class="mb-4">{{ id === -1 ? 'New task' : 'Edit task' }}</h1>
+
+<div class="container">
+  <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <p *ngIf="loading">Loading...</p>
+
+  <form (ngSubmit)="saveTodo()" #todoForm="ngForm">
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input
+        id="description"
+        type="text"
+        name="description"
+        class="form-control"
+        [(ngModel)]="description"
+        #descriptionModel="ngModel"
+        required
+        minlength="3"
+        maxlength="200" />
+      <div class="text-danger" *ngIf="descriptionModel.invalid && descriptionModel.touched">
+        The description must be between 3 and 200 characters.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="targetDate" class="form-label">Target date</label>
+      <input
+        id="targetDate"
+        type="date"
+        name="targetDate"
+        class="form-control"
+        [(ngModel)]="targetDate"
+        #targetDateModel="ngModel"
+        required />
+    </div>
+
+    <div class="form-check mb-3">
+      <input
+        id="done"
+        type="checkbox"
+        name="done"
+        class="form-check-input"
+        [(ngModel)]="done" />
+      <label for="done" class="form-check-label">Already done</label>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="todoForm.invalid">Save</button>
+    <a routerLink="/todos" class="btn btn-link">Cancel</a>
+  </form>
+</div>

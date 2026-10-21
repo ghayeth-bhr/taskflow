@@ -1,0 +1,46 @@
+<h1 class="mb-4">My tasks</h1>
+
+<div class="alert alert-success" *ngIf="message">{{ message }}</div>
+<div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div class="container">
+  <p *ngIf="loading">Loading...</p>
+
+  <table class="table" *ngIf="!loading && todos.length > 0">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Target date</th>
+        <th>Status</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todos" [class.table-success]="todo.done">
+        <td>{{ todo.description }}</td>
+        <td>{{ todo.targetDate | date: 'mediumDate' }}</td>
+        <td>
+          <span *ngIf="todo.done">Done</span>
+          <span *ngIf="!todo.done">To do</span>
+        </td>
+        <td>
+          <button (click)="toggleDone(todo)" class="btn btn-sm btn-outline-success">
+            {{ todo.done ? 'Reopen' : 'Complete' }}
+          </button>
+          <button (click)="updateTodo(todo.id)" class="btn btn-sm btn-success">Edit</button>
+        </td>
+        <td>
+          <button (click)="deleteTodo(todo.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && todos.length === 0">
+    No task yet - create your first one.
+  </p>
+
+  <div class="row mt-3">
+    <button (click)="addTodo()" class="btn btn-success">Add a task</button>
+  </div>
+</div>

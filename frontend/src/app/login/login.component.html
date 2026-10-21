@@ -1,0 +1,39 @@
+<h1 class="mb-4">TaskFlow</h1>
+
+<div class="container">
+  <div class="alert alert-danger" *ngIf="invalidLogin">{{ errorMessage }}</div>
+
+  <form (ngSubmit)="handleLogin()" #loginForm="ngForm">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        id="username"
+        type="text"
+        name="username"
+        class="form-control"
+        [(ngModel)]="username"
+        required
+        autocomplete="username" />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        class="form-control"
+        [(ngModel)]="password"
+        required
+        autocomplete="current-password" />
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid || loading">
+      {{ loading ? 'Signing in...' : 'Login' }}
+    </button>
+  </form>
+
+  <p class="mt-4 text-muted">
+    Demo account: <code>demo</code> / <code>demo1234</code>
+  </p>
+</div>
