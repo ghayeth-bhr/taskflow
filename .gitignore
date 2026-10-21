@@ -1,0 +1,33 @@
+# ---- Java / Maven ----
+target/
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# ---- Angular / Node ----
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+# ---- Local databases ----
+data/
+*.db
+*.mv.db
+*.trace.db
+
+# ---- IDE / OS ----
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
+run.log
+serve.log
