@@ -1,0 +1,20 @@
+# Test profile: in-memory database, isolated from the local dev database.
+spring:
+  application:
+    name: taskflow-backend-test
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+
+taskflow:
+  jwt:
+    secret: taskflow-test-secret-0123456789abcdefghijklmnopqrstuvwxyz
+    ttl-minutes: 30
+  seed:
+    username: demo
+    password: demo1234
